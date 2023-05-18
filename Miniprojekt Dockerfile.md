@@ -17,15 +17,18 @@ cd website
 
 # 2. Dateien für Webseite
 
-Im ```index.html```  sind die Formatierungsinformationen abglelegt. Mit ```touch``` wird die Datei erstellt und mit ```nano``` wird der untenstehende Code eingefügt.
+Im ```index.html```  sind die Formatierungsinformationen abglelegt. Mit ```touch``` wird die Datei erstellt und mit ```nano``` wird der untenstehende Code eingefügt. Im ```style.css``` sind die Grafischen Informationen gespeichert, welche für das Design der Website wichtig sind.
 
 Code Terminal: 
 ``` 
 touch index.html
 nano index.html
+
+touch style.css
+nano style.css
 ```
 
-Code HTML Datei:
+Code .HTML Datei:
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +36,9 @@ Code HTML Datei:
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
     <title>Document Miniprojekt</title>
 </head>
 <body>
@@ -43,6 +49,14 @@ Code HTML Datei:
 
 </body>
 </html>
+```
+
+Code .CSS Datei:
+```css
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
 ```
 <p>&nbsp;</p>
 
@@ -60,6 +74,7 @@ Code im dockerfile:
 ``` 
 FROM nginx
 COPY index.html /usr/share/nginx/html/index.html
+COPY style.css /usr/share/nginx/html/style.css
 EXPOSE 8080
 ```
 <p>&nbsp;</p>
@@ -70,7 +85,7 @@ Aus der HTML Datei und mit den Informationen vom Dockerfile wird ein Image erste
 
 Code Terminal:
 ``` 
-docker build -t my-webserver .
+docker build -t my-webserver-image .
 ```
 
 ## 4.1 Kontrolle
@@ -82,7 +97,7 @@ Code Terminal:
 docker image ls
 ```
 
-Falls das Image erstellt wurde und vorhanden ist, wird die Ausgabe so aussehen: 
+Falls das Image erstellt wurde und vorhanden ist, wird die Ausgabe etwa so aussehen: 
 ``` 
 vmadmin@lp-22-04:~/Desktop/Miniproket/my-webserver/website$ docker image ls
 REPOSITORY               TAG        IMAGE ID       CREATED          SIZE
